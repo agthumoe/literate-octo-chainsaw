@@ -17,7 +17,6 @@ export default class BulkDiscountRule implements Rule {
     const count = filteredProducts.length;
     // calculate the discount
     if (count >= this.properties.appliedLimit) {
-      console.log(products[0].price, count, this.properties.newPrice);
       return filteredProducts[0].price
         .mul(count)
         .sub(new Decimal(this.properties.newPrice).mul(count));
