@@ -7,6 +7,8 @@ import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  // enable cors
+  app.enableCors();
 
   // useContainer(app.select(AppModule));
   /**
@@ -48,6 +50,6 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, document);
 
   app.enableShutdownHooks();
-  await app.listen(3000);
+  await app.listen(4000);
 }
 bootstrap();

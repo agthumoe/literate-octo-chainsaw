@@ -11,12 +11,14 @@ export default class BulkDiscountRule implements Rule {
   constructor(private readonly properties: BulkDiscountRuleProperties) {}
   apply(products: Product[]): Decimal {
     // count the number of products with the given sku
-    const count = products.filter(
+    const filteredProducts = products.filter(
       (product) => product.sku === this.properties.sku,
-    ).length;
+    );
+    const count = filteredProducts.length;
     // calculate the discount
     if (count >= this.properties.appliedLimit) {
-      return products[0].price
+      console.log(products[0].price, count, this.properties.newPrice);
+      return filteredProducts[0].price
         .mul(count)
         .sub(new Decimal(this.properties.newPrice).mul(count));
     }

@@ -18,6 +18,9 @@ export default class Buy1GetAnotherFree implements Rule {
     const getAnotherProducts = products.filter(
       (product) => product.sku === this.properties.getAnotherSku,
     );
+    if (buy1Products.length < 1 || getAnotherProducts.length < 1) {
+      return new Decimal(0);
+    }
     // calculate the discount
     const discount = getAnotherProducts[0].price.mul(
       Math.min(buy1Products.length, getAnotherProducts.length),
